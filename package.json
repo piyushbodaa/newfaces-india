@@ -1,0 +1,10 @@
+{
+  "name": "newfaces-india",
+  "version": "1.0.0",
+  "description": "NewFaces India — Platform for budding Indian models, influencers, creators and actresses",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "private": true
+}

@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>NewFaces India — Budding Models via Instagram + Agencies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,900&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="nav">
+  <a href="#top" class="brand"><span class="brand-mark">N</span> NewFaces <span class="brand-india">INDIA</span></a>
+  <nav class="nav-links">
+    <a href="#explore">Explore on Instagram</a>
+    <a href="#agencies">Agencies</a>
+    <a href="#join">Join — Free</a>
+  </nav>
+  <div class="nav-actions">
+    <button id="shortlistBtn" class="shortlist-btn" type="button">♥ Shortlist <span id="shortlistCount" class="pill">0</span></button>
+    <a href="#join" class="btn-primary small">Add your Instagram</a>
+  </div>
+  <button id="menuBtn" class="menu-btn" aria-label="Menu">≡</button>
+</header>
+
+<section id="top" class="hero">
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <div class="hero-eyebrow">Public Instagram only • No private data • Opt-in</div>
+      <h1>Find India's budding<br>faces <em>where they post.</em></h1>
+      <p class="hero-sub">A discovery layer for early-career models, creators & budding actresses — via public Instagram, and the agencies that represent them. No private emails or numbers. Brands DM directly on Instagram.</p>
+      <div class="hero-search">
+        <input id="heroSearch" type="search" placeholder="Search @handle, city, agency… e.g. @aanya Mumbai">
+        <button id="heroSearchBtn" type="button">Search</button>
+      </div>
+      <div class="hero-quick"><span>Try:</span><button data-q="Mumbai" class="chip-quick">Mumbai</button><button data-q="@" class="chip-quick">All Instagram</button><button data-q="Faces" class="chip-quick">Agency</button></div>
+      <div class="hero-stats">
+        <div><strong id="statTotal">1000</strong><span>Insta Faces</span></div>
+        <div><strong id="statAgencies">84</strong><span>Agencies</span></div>
+        <div><strong>28+</strong><span>Cities</span></div>
+        <div><strong>Reg</strong><span>Instagram verified</span></div>
+      </div>
+      <div class="hero-cta"><a href="#explore" class="btn-primary">Browse 1000 Instagram faces</a><a href="#agencies" class="btn-ghost">Find an agency</a></div>
+    </div>
+    <aside class="hero-card"><div class="hero-card-head">Fresh Instagram drops this week</div><div id="heroPicks" class="hero-picks"></div><div class="hero-card-foot"><div class="avatars"><span>IG</span></div><p>Every profile links to public Instagram. Contact via DM — no private data stored.</p></div></aside>
+  </div>
+</section>
+
+<div class="trust"><span>How it works:</span> Models opt-in with public Instagram &rarr; Agencies claim listings &rarr; Brands DM directly on Instagram. <strong>No scraping. No phone numbers.</strong></div>
+
+<section id="explore" class="explore">
+  <div class="explore-head"><div><h2>Faces on Instagram</h2><p>All 1,000 are early-career (0–3 yrs). Tap any card to open public Instagram.</p></div><div class="explore-meta"><span id="resultCount"></span><label class="sort">Sort:<select id="sortSel"><option value="new">Newest</option><option value="followers">Most followed</option><option value="rate-low">Rate low → high</option><option value="rate-high">Rate high → low</option><option value="name">Name A–Z</option></select></label></div></div>
+  <div class="filters">
+    <div class="filter-row"><span class="filter-label">Category</span><div id="catChips" class="chips"></div></div>
+    <div class="filter-grid">
+      <label>City <select id="citySel"><option value="">All cities</option></select></label>
+      <label>Agency <select id="agencySel"><option value="">All agencies</option></select></label>
+      <label>Language <select id="langSel"><option value="">All languages</option></select></label>
+      <label>Experience <select id="expSel"><option value="">Any</option><option value="0-1">0–1 yr</option><option value="1-2">1–2 yrs</option><option value="2-3">2–3 yrs</option></select></label>
+      <label>Followers <select id="folSel"><option value="">Any</option><option value="nano">&lt;5k Nano</option><option value="micro">5k–50k Micro</option><option value="mid">50k–200k Mid</option><option value="rising">200k+ Rising</option></select></label>
+      <label>Search Instagram <input id="searchInp" type="search" placeholder="@handle or tag…"></label>
+    </div>
+    <div class="filter-actions"><button id="clearFilters" type="button" class="link-btn">Clear filters</button><span class="filter-hint">♥ to shortlist, then DM via Instagram.</span></div>
+  </div>
+  <div id="grid" class="grid"></div>
+  <div class="load-more-wrap"><button id="loadMoreBtn" class="btn-ghost" type="button">Load more</button><span id="pageInfo" class="page-info"></span></div>
+  <div class="disclaimer"><strong>Public-data note:</strong> We link only to public Instagram — no private emails/numbers stored. 1,000 faces are demo data for layout — real listings are opt-in via Join.</div>
+</section>
+
+<section id="agencies" class="agency-sec">
+  <div class="agency-head"><div><h2>Agencies — budding focus</h2><p>Small-to-mid agencies scouting fresh talent. Reach out via public Instagram/website.</p></div><div class="agency-meta"><span id="agencyCount"></span></div></div>
+  <div class="agency-filters"><select id="agCitySel"><option value="">All cities</option></select><select id="agSpecSel"><option value="">All specialties</option><option>Fashion / Editorial</option><option>Commercial / Product</option><option>Influencer / Creator</option><option>Casting / OTT</option><option>Regional / Vernacular</option></select><input id="agSearch" type="search" placeholder="Agency name or @handle…"><button id="agClear" type="button" class="link-btn">Clear</button></div>
+  <div id="agencyGrid" class="agency-grid"></div>
+  <div class="disclaimer light"><strong>Sample agencies:</strong> 84 fictional-but-plausible agency cards for demo. Real partners claim listings and update public Instagram/website.</div>
+</section>
+
+<section id="join" class="join">
+  <div class="join-head"><h2>New face on Instagram?</h2><p>List your public Instagram free. Agencies & brands discover you where you post. DM only — no email/phone needed.</p></div>
+  <div class="join-grid">
+    <form id="joinForm" class="join-form"><div class="f-grid">
+      <label>Display name *<input name="name" required placeholder="Ananya Sharma"></label>
+      <label>Instagram handle *<input name="insta" required placeholder="@aanya.mumbai"></label>
+      <label>Category *<select name="category" required><option value="">Select…</option><option>Fashion Model</option><option>Commercial Model</option><option>Influencer</option><option>Content Creator</option><option>Budding Actress</option></select></label>
+      <label>City *<input name="city" required placeholder="Mumbai"></label>
+      <label>Agency (if any)<select name="agency"><option value="">Independent</option></select></label>
+      <label>Followers<select name="followers"><option>Under 5k</option><option>5k–50k</option><option>50k–200k</option><option>200k+</option></select></label>
+      <label>Day rate ₹<input name="rate" type="number" min="0" placeholder="8000"></label>
+      <label>Languages<input name="langs" placeholder="Hindi, English"></label>
+      <label class="wide">Tags<input name="tags" placeholder="Editorial, Saree, Reels, Dance"></label>
+      <label class="wide">Bio<textarea name="bio" rows="3" placeholder="Portfolio link + work you want…"></textarea></label>
+    </div><button class="btn-primary" type="submit">Submit public profile</button><p class="fine">By submitting you confirm this is your public Instagram and you want to be listed.</p><div id="joinOk" class="ok hidden">✓ Listed! Your Instagram profile now appears in Explore.</div></form>
+    <aside class="join-side"><h3>Who should join?</h3><ul><li>0–3 years — just starting</li><li>Public Instagram active</li><li>Open to test shoots / reels / indie brands</li></ul><h3>For agencies</h3><ul><li>Claim your agency card above</li><li>Add roster via public Instagram only</li><li>No private data — we link, we don't scrape</li></ul><div class="side-note"><strong>No private numbers.</strong> DMs happen on Instagram. Safer and compliant.</div></aside>
+  </div>
+</section>
+
+<footer class="foot"><div class="foot-inner"><span>© 2026 NewFaces India — Public Instagram directory.</span><span><a href="#explore">Explore</a> • <a href="#agencies">Agencies</a> • <a href="#join">Join</a></span></div></footer>
+<div id="modal" class="modal hidden"><div class="modal-back" id="modalBack"></div><div class="modal-card" id="modalCard"></div></div>
+<div id="drawer" class="drawer hidden"><div class="drawer-back" id="drawerBack"></div><div class="drawer-card"><div class="drawer-head"><h3>Shortlist</h3><button id="drawerClose" class="link-btn" type="button">Close ✕</button></div><div id="drawerList"></div><div class="drawer-foot"><button id="copyShortlist" class="btn-primary small" type="button">Copy list</button></div></div></div>
+<script src="app.js"></script>
+</body>
+</html>
