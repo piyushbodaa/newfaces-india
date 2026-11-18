@@ -2,47 +2,46 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
-const root = __dirname;
 const PORT = process.env.PORT || 3000;
 
-const MIME = {
-  '.html': 'text/html; charset=utf-8',
-  '.css': 'text/css; charset=utf-8',
-  '.js': 'text/javascript; charset=utf-8',
-  '.json': 'application/json',
-  '.svg': 'image/svg+xml',
-  '.png': 'image/png',
-  '.jpg': 'image/jpeg',
-  '.ico': 'image/x-icon',
-};
+// Only these checked-in assets belong to the public site.
+const assets = new Map([
+  ['/index.html', 'text/html; charset=utf-8'],
+  ['/styles.css', 'text/css; charset=utf-8'],
+  ['/app.js', 'text/javascript; charset=utf-8'],
+]);
 
 const server = http.createServer((req, res) => {
-  let urlPath = decodeURIComponent(req.url.split('?')[0]);
-  if (urlPath === '/') urlPath = '/index.html';
-  const safe = path.normalize(path.join(root, urlPath));
-  if (!safe.startsWith(root)) {
-    res.writeHead(403); res.end('Forbidden'); return;
+  let pathname;
+  try {
+    pathname = decodeURIComponent(req.url.split('?')[0]);
+  } catch {
+    res.writeHead(400).end('Bad request');
+    return;
   }
-  fs.readFile(safe, (err, data) => {
+
+  if (!pathname.startsWith('/') || pathname.includes('\\') || pathname.includes('\0') ||
+      pathname.split('/').some(segment => segment.startsWith('.'))) {
+    res.writeHead(404).end('Not found');
+    return;
+  }
+
+  // The client handles extensionless routes. All other unknown assets are missing.
+  const asset = assets.has(pathname) ? pathname : '/index.html';
+  if (asset !== pathname && path.extname(pathname)) {
+    res.writeHead(404).end('Not found');
+    return;
+  }
+
+  fs.readFile(path.join(__dirname, asset), (err, data) => {
     if (err) {
-      // SPA fallback for index
-      if (urlPath !== '/index.html' && !path.extname(urlPath)) {
-        fs.readFile(path.join(root, 'index.html'), (e2, html) => {
-          if (e2) { res.writeHead(404); res.end('Not found'); }
-          else { res.writeHead(200, { 'Content-Type': MIME['.html'] }); res.end(html); }
-        });
-        return;
-      }
-      res.writeHead(404, { 'Content-Type': 'text/plain' });
-      res.end('Not found');
+      res.writeHead(404).end('Not found');
       return;
     }
-    const ext = path.extname(safe).toLowerCase();
-    res.writeHead(200, { 'Content-Type': MIME[ext] || 'application/octet-stream' });
-    res.end(data);
+    res.writeHead(200, { 'Content-Type': assets.get(asset) }).end(data);
   });
 });
 
 server.listen(PORT, '0.0.0.0', () => {
-  console.log(`NewFaces India running at http://localhost:${PORT}`);
+  console.log(`NewFaces India running at http://localhost:${server.address().port}`);
 });
