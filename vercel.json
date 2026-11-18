@@ -1,7 +1,7 @@
 {
   "framework": null,
-  "buildCommand": null,
+  "buildCommand": "mkdir -p dist && cp index.html app.js styles.css dist/",
   "installCommand": null,
-  "outputDirectory": ".",
+  "outputDirectory": "dist",
   "ignoreCommand": null
 }
